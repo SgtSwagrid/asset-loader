@@ -1,8 +1,6 @@
 package io.github.sgtswagrid.assetloader
 
-import scala.jdk.CollectionConverters.*
 import java.nio.file.*
-import java.security.MessageDigest
 
 /**
   * A utility for loading and caching static assets so that they can be served
