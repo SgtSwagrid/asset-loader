@@ -1,0 +1,71 @@
+# One-time repository initialisation: applies settings and creates branch protection
+# rulesets that cannot be defined in static config files. Safe to re-run.
+#
+# Requirements:
+#   - A GitHub Personal Access Token (PAT) with admin scope must be stored as the
+#     `GH_TOKEN` repository secret. Admin access is required to manage rulesets and
+#     repository settings, which exceed GITHUB_TOKEN's maximum permissions.
+
+name: Initialisation
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+
+  init:
+    name: Initialise Repository
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Ensure GH_TOKEN is set
+        id: check-gh-token
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::GH_TOKEN secret is not set. Create a GitHub Personal Access Token and add it as a repository secret named GH_TOKEN."
+            exit 1
+          fi
+
+      - name: Checkout code
+        id: checkout
+        uses: actions/checkout@v4
+
+      # Configures repository settings that cannot be set via static config files.
+      - name: Configure repository settings
+        id: configure
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          gh api "repos/${{ github.repository }}" --method PATCH \
+            --field squash_merge_commit_title=PR_TITLE \
+            --field delete_branch_on_merge=true \
+            --field allow_update_branch=true
+
+      # Applies all ruleset definitions from .github/rulesets/. Strips non-API
+      # fields before posting, and skips any ruleset that already exists.
+      - name: Apply rulesets
+        id: apply-rulesets
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          for file in .github/rulesets/*.json; do
+            RULESET_NAME=$(jq -r '.name' "$file")
+
+            EXISTING_ID=$(gh api "repos/${{ github.repository }}/rulesets" \
+              --jq ".[] | select(.name == \"$RULESET_NAME\") | .id" 2>/dev/null || true)
+
+            if [ -n "$EXISTING_ID" ]; then
+              echo "Ruleset '$RULESET_NAME' already exists. Skipping."
+              continue
+            fi
+
+            jq 'del(._comment)' "$file" \
+              | gh api "repos/${{ github.repository }}/rulesets" --method POST --input -
+
+            echo "Ruleset '$RULESET_NAME' created successfully."
+          done

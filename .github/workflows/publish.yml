@@ -1,0 +1,63 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+# Cancel in-progress runs when starting a new one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  # Publish artefacts to Maven Central.
+  # Triggered by version tags (v*) to publish a full release.
+  #
+  # Required repository secrets:
+  #   PGP_SECRET          – base64-encoded GPG private key.
+  #   PGP_PASSPHRASE      – passphrase for the GPG key.
+  #   SONATYPE_USERNAME   – Sonatype Central Portal token user.
+  #   SONATYPE_PASSWORD   – Sonatype Central Portal token password.
+  publish:
+    name: Publish to Maven Central
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Java
+        id: install-java
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: sbt
+
+      - name: Install SBT
+        id: install-sbt
+        uses: sbt/setup-sbt@v1
+
+      # sbt-ci-release decodes PGP_SECRET via `echo $PGP_SECRET | base64 --decode`.
+      # If the secret was encoded without `-w0` (no line-wrap), the value stored
+      # in GitHub Secrets will contain embedded newlines, which corrupts the
+      # decode and produces: "secret key ring doesn't start with secret key tag".
+      # Normalising to a single-line base64 string here fixes that regardless of
+      # how the secret was originally generated.
+      - name: Normalise PGP secret
+        run: echo "PGP_SECRET=$(echo "$PGP_SECRET" | tr -d '\r\n')" >> "$GITHUB_ENV"
+        env:
+          PGP_SECRET: ${{ secrets.PGP_SECRET }}
+
+      - name: Publish
+        run: sbt ci-release
+        env:
+          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+          PGP_SECRET: ${{ env.PGP_SECRET }}
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}

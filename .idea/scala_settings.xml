@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaProjectSettings">
+    <option name="customBasePackages">
+      <map>
+        <entry key="root.main" value="org.example" />
+        <entry key="root.test" value="org.example" />
+        <entry key="scala-library-template.main" value="com.example" />
+        <entry key="scala-library-template.test" value="com.example" />
+      </map>
+    </option>
+    <option name="inheritBasePackages" value="false" />
+    <option name="migrateConfigurationsNotificationShown" value="true" />
+    <option name="INHERIT_BASE_PACKAGES" value="false" />
+    <option name="CUSTOM_BASE_PACKAGES">
+      <module name="root.main" basePackage="org.example" />
+      <module name="root.test" basePackage="org.example" />
+      <module name="scala-library-template.main" basePackage="com.example" />
+      <module name="scala-library-template.test" basePackage="com.example" />
+    </option>
+  </component>
+</project>

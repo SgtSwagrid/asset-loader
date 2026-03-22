@@ -1,0 +1,21 @@
+{
+  "editor": {
+    "formatOnSave": true,
+    "tabSize": 2,
+    "indentSize": 2,
+    "insertSpaces": true,
+    "detectIndentation": false,
+    "stickyScroll": {
+      "enabled": false
+    }
+  },
+  "files": {
+    "eol": "\n",
+    "insertFinalNewline": true
+  }
+  "files.watcherExclude": {
+    "**/target": true,
+    "**/.bloop": true,
+    "**/.metals": true
+  },
+}
