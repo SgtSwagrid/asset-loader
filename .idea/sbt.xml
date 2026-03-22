@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="C:\Users\Alec\Workspace\scala-library-template" />
-            <option value="C:\Users\Alec\Workspace\scala-library-template\project" />
+            <option value="C:\Users\Alec\Workspace\asset-loader" />
+            <option value="C:\Users\Alec\Workspace\asset-loader\project" />
           </set>
         </option>
         <option name="resolveSbtClassifiers" value="true" />

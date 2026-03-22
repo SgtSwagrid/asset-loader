@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <option name="separateProdTestSources" value="true" />
-    <profile name="sbt 1" modules="root,root.main,root.test,scala-colour,scala-colour.main,scala-colour.main~1,scala-colour.test,scala-colour.test~1,scala-library-template" />
+    <profile name="sbt 1" modules="assetloader,assetloader.main,assetloader.test,root,root.main,root.test,scala-colour,scala-colour.main,scala-colour.main~1,scala-colour.test,scala-colour.test~1,scala-library-template" />
     <profile name="sbt 2" modules="scala-library-template.main,scala-library-template.test">
       <parameters>
         <parameter value="-language:experimental.subCases" />

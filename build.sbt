@@ -6,8 +6,7 @@ import sbt.Keys._
 ThisBuild / name        := "asset-loader"
 ThisBuild / description := "A simple static asset loader for Scala web servers."
 
-ThisBuild / homepage :=
-  Some(url("https://github.com/SgtSwagrid/asset-loader"))
+ThisBuild / homepage := Some(url("https://github.com/SgtSwagrid/asset-loader"))
 
 // The organisation who maintains this library.
 ThisBuild / organization         := "io.github.sgtswagrid"
@@ -24,14 +23,12 @@ ThisBuild / scmInfo := Some(ScmInfo(
 ThisBuild / licenses :=
   List("MIT License" -> url("https://opensource.org/licenses/MIT"))
 
-ThisBuild / developers := List(
-  Developer(
-    id = "SgtSwagrid",
-    name = "Alec Dorrington",
-    email = "alecdorrington@gmail.com",
-    url = url("http://github.com/SgtSwagrid")
-  )
-)
+ThisBuild / developers := List(Developer(
+  id = "SgtSwagrid",
+  name = "Alec Dorrington",
+  email = "alecdorrington@gmail.com",
+  url = url("https://github.com/SgtSwagrid"),
+))
 
 ThisBuild / scalaVersion := "3.8.2"
 
@@ -42,6 +39,6 @@ ThisBuild / publishMavenStyle      := true
 Global / excludeLintKeys ++= Set(name, publishMavenStyle)
 
 lazy val assetloader = (project in file(".")).settings(
-  packagePrefix                          := (ThisBuild / organization).value,
+  packagePrefix                          := "io.github.sgtswagrid.assetloader",
   libraryDependencies += "org.scalameta" %% "munit" % "1.2.4" % Test,
 )

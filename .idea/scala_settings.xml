@@ -3,6 +3,8 @@
   <component name="ScalaProjectSettings">
     <option name="customBasePackages">
       <map>
+        <entry key="assetloader.main" value="io.github.sgtswagrid.assetloader" />
+        <entry key="assetloader.test" value="io.github.sgtswagrid.assetloader" />
         <entry key="root.main" value="org.example" />
         <entry key="root.test" value="org.example" />
         <entry key="scala-library-template.main" value="com.example" />
@@ -13,6 +15,8 @@
     <option name="migrateConfigurationsNotificationShown" value="true" />
     <option name="INHERIT_BASE_PACKAGES" value="false" />
     <option name="CUSTOM_BASE_PACKAGES">
+      <module name="assetloader.main" basePackage="io.github.sgtswagrid.assetloader" />
+      <module name="assetloader.test" basePackage="io.github.sgtswagrid.assetloader" />
       <module name="root.main" basePackage="org.example" />
       <module name="root.test" basePackage="org.example" />
       <module name="scala-library-template.main" basePackage="com.example" />
