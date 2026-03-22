@@ -15,5 +15,15 @@ package io.github.sgtswagrid.assetloader
   *   An
   *   [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag)
   *   for the asset, to identify the version for caching purposes.
+  *
+  * @param cacheControl
+  *   Instructions for how the asset may be cached, used for the
+  *   [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control)
+  *   header.
   */
-type Asset = (content: Array[Byte], contentType: String, etag: String)
+type Asset = (
+  content: Array[Byte],
+  contentType: String,
+  etag: String,
+  cacheControl: String,
+)

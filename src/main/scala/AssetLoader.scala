@@ -17,8 +17,15 @@ import scala.jdk.CollectionConverters.*
   * @param assetsPath
   *   The root directory on the server's file system where assets are stored,
   *   relative to the directory of the running server process.
+  *
+  * @param maxAge
+  *   The maximum age (in seconds) for which an asset should be considered fresh
+  *   for caching purposes. Caching is disabled by default (`0`).
   */
-class AssetLoader private (private val assetsPath: Path):
+class AssetLoader private (
+  private val assetsPath: Path,
+  private val maxAge: Int = 0,
+):
 
   /**
     * Retrieves the asset corresponding to the given path, if it exists.
@@ -27,6 +34,25 @@ class AssetLoader private (private val assetsPath: Path):
     *   The path to the asset, relative to the `assetsPath`.
     */
   def getAsset(path: String): Option[Asset] = assets.get(path)
+
+  /**
+    * Retrieves the asset corresponding to the given path, if it exists.
+    *
+    * @param path
+    *   The path to the asset, relative to the `assetsPath`. Given as a
+    *   "/"-separated array of path segments.
+    */
+  def getAsset(path: Iterable[String]): Option[Asset] =
+    getAsset(path.mkString("/"))
+
+  /**
+    * Retrieves the asset corresponding to the given path, if it exists.
+    *
+    * @param path
+    *   The path to the asset, relative to the `assetsPath`.
+    */
+  def getAsset(path: Path): Option[Asset] =
+    getAsset(path.toString.replace("\\", "/"))
 
   /**
     * A collection of all assets, keyed by relative path. This is loaded lazily
@@ -41,7 +67,7 @@ class AssetLoader private (private val assetsPath: Path):
     .map: file =>
       val bytes = Files.readAllBytes(file)
       val path  = assetsPath.relativize(file).toString.replace("\\", "/")
-      path -> (bytes, contentType(file), etag(bytes))
+      path -> (bytes, contentType(file), etag(bytes), cacheControl)
     .toMap
 
   /**
@@ -56,6 +82,10 @@ class AssetLoader private (private val assetsPath: Path):
   private def etag(bytes: Array[Byte]): String =
     val hash = MessageDigest.getInstance("MD5").digest(bytes)
     hash.map("%02x".format(_)).mkString("\"", "", "\"")
+
+  /** The `Cache-Control` header value based on the chosen `maxAge`. */
+  private lazy val cacheControl: String =
+    if maxAge <= 0 then "no-cache" else s"public, max-age=$maxAge}"
 
   /**
     * Determines the content type based on the file extension. Known text types
@@ -131,11 +161,16 @@ object AssetLoader:
 
   /**
     * Constructs a new [[AssetLoader]].
+    *
     * @param assetsPath
     *   The root directory on the server's file system where assets are stored,
     *   relative to the directory of the running server process.
+    *
+    * @param maxAge
+    *   The maximum age (in seconds) for which an asset should be considered
+    *   fresh for caching purposes. Set to `0` to disable caching.
     */
-  def apply(assetsPath: String): AssetLoader =
+  def apply(assetsPath: String, maxAge: Int): AssetLoader =
     new AssetLoader(Paths.get(assetsPath))
 
   /**
@@ -145,9 +180,17 @@ object AssetLoader:
     *   The root directory on the server's file system where assets are stored,
     *   relative to the directory of the running server process. Given as a
     *   "/"-separated array of path segments.
+    *
+    * @param maxAge
+    *   The maximum age (in seconds) for which an asset should be considered
+    *   fresh for caching purposes. Set to `0` to disable caching.
     */
-  def apply(assetsPath: Iterable[String]): AssetLoader =
-    new AssetLoader(Paths.get(assetsPath.mkString("/")))
+  def apply
+    (
+      assetsPath: Iterable[String],
+      maxAge: Int,
+    )
+    : AssetLoader = new AssetLoader(Paths.get(assetsPath.mkString("/")))
 
   /**
     * Constructs a new [[AssetLoader]].
@@ -155,5 +198,10 @@ object AssetLoader:
     * @param assetsPath
     *   The root directory on the server's file system where assets are stored,
     *   relative to the directory of the running server process.
+    *
+    * @param maxAge
+    *   The maximum age (in seconds) for which an asset should be considered
+    *   fresh for caching purposes. Set to `0` to disable caching.
     */
-  def apply(assetsPath: Path): AssetLoader = new AssetLoader(assetsPath)
+  def apply(assetsPath: Path, maxAge: Int): AssetLoader =
+    new AssetLoader(assetsPath)
