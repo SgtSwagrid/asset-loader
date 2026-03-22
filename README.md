@@ -22,6 +22,24 @@ Add the following dependency to your `build.sbt`:
 libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.2"
 ```
 
+Compiled with Scala `3.8.2`, with no intention to explicitly support older versions.
+
 ## ⚙️ Example
 
-TODO
+This example uses fake `Request` and `Response` types to illustrate the idea in a simple manner.
+The details will depend on your choice of web framework (e.g. [Tapir](https://tapir.softwaremill.com/en/latest/) or [http4s](https://http4s.org/)).
+
+```scala
+import io.github.sgtswagrid.assetloader.{Asset, AssetLoader}
+
+val assetLoader = AssetLoader(assetsPath = "client/src/main/resources")
+
+def handleRequest(request: Request): Response =
+  if request.path.startsWith("assets/") then
+    val assetOption: Option[Asset] = assetLoader.getAsset(request.path.dropLeft(7))
+    assetOption match
+      case Some(asset) => Response(asset)
+      case None => Response.NotFound
+  else
+    // ...
+```
