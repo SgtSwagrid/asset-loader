@@ -19,7 +19,7 @@ This tool is extremely small and minimalistic, with absolutely no bells or whist
 Add the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.3"
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.5"
 ```
 
 Compiled with Scala `3.8.2`, with no intention to explicitly support older versions.
@@ -42,4 +42,33 @@ def handleRequest(request: Request): Response =
       case None => Response.NotFound
   else
     // ...
+```
+
+## 🦡 Tapir Integration
+
+[Tapir](https://tapir.softwaremill.com/en/latest/) is a library to describe HTTP APIs and expose them as a server. A separate connector is provided to easily create a Tapir endpoint that serves static files from `asset-loader`. Just add the following additional dependency:
+
+```scala
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader-tapir" % "0.1.5"
+```
+
+Observe the following minimal example, using [Netty](https://netty.io/) and [Cats Effect](https://typelevel.org/cats-effect/):
+
+```scala
+object Main extends ResourceApp.Forever:
+
+  val assets = AssetService(
+    externalPath = "assets",
+    internalPath = Paths.get("src/main/resources"),
+  )
+
+  def run(args: List[String]) =
+    NettyCatsServer
+      .io()
+      .flatMap: server =>
+        val service = server
+          .host("0.0.0.0")
+          .port("8080")
+          .addEndpoints(assets.serverEndpoint[IO])
+        Resource.make(service.start())(_.stop()).as(())
 ```
