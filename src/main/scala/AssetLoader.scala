@@ -11,22 +11,20 @@ import scala.jdk.CollectionConverters.*
   * Only intended for use when the total number of assets is small enough to fit
   * comfortably in memory.
   *
-  * Warning: Work with the assumption that all files in `assetsRoot` will be
+  * Warning: Work with the assumption that all files in `assetsPath` will be
   * made publicly accessible.
   *
-  * @param assetsRoot
+  * @param assetsPath
   *   The root directory on the server's file system where assets are stored,
   *   relative to the directory of the running server process.
   */
-class AssetLoader(private val assetsRoot: String):
-
-  private lazy val assetsPath = Paths.get(assetsRoot)
+class AssetLoader private (private val assetsPath: Path):
 
   /**
     * Retrieves the asset corresponding to the given path, if it exists.
     *
     * @param path
-    *   The path to the asset, relative to the `assetsRoot`.
+    *   The path to the asset, relative to the `assetsPath`.
     */
   def getAsset(path: String): Option[Asset] = assets.get(path)
 
@@ -127,3 +125,35 @@ class AssetLoader(private val assetsRoot: String):
       case _ => Option(
           Files.probeContentType(file),
         ).getOrElse("application/octet-stream")
+
+/** @see [[AssetLoader]] */
+object AssetLoader:
+
+  /**
+    * Constructs a new [[AssetLoader]].
+    * @param assetsPath
+    *   The root directory on the server's file system where assets are stored,
+    *   relative to the directory of the running server process.
+    */
+  def apply(assetsPath: String): AssetLoader =
+    new AssetLoader(Paths.get(assetsPath))
+
+  /**
+    * Constructs a new [[AssetLoader]].
+    *
+    * @param assetsPath
+    *   The root directory on the server's file system where assets are stored,
+    *   relative to the directory of the running server process. Given as a
+    *   "/"-separated array of path segments.
+    */
+  def apply(assetsPath: Iterable[String]): AssetLoader =
+    new AssetLoader(Paths.get(assetsPath.mkString("/")))
+
+  /**
+    * Constructs a new [[AssetLoader]].
+    *
+    * @param assetsPath
+    *   The root directory on the server's file system where assets are stored,
+    *   relative to the directory of the running server process.
+    */
+  def apply(assetsPath: Path): AssetLoader = new AssetLoader(assetsPath)
