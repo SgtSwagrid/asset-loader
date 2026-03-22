@@ -3,8 +3,10 @@
   <component name="ScalaProjectSettings">
     <option name="customBasePackages">
       <map>
-        <entry key="asset-loader.main" value="io.github.sgtswagrid.assetloader" />
-        <entry key="asset-loader.test" value="io.github.sgtswagrid.assetloader" />
+        <entry key="asset-loader.asset-loader-tapir.main" value="io.github.sgtswagrid.assetloader.tapir" />
+        <entry key="asset-loader.asset-loader-tapir.test" value="io.github.sgtswagrid.assetloader.tapir" />
+        <entry key="asset-loader.asset-loader.main" value="io.github.sgtswagrid.assetloader" />
+        <entry key="asset-loader.asset-loader.test" value="io.github.sgtswagrid.assetloader" />
         <entry key="assetloader.main" value="io.github.sgtswagrid.assetloader" />
         <entry key="assetloader.test" value="io.github.sgtswagrid.assetloader" />
         <entry key="root.main" value="org.example" />
@@ -17,8 +19,10 @@
     <option name="migrateConfigurationsNotificationShown" value="true" />
     <option name="INHERIT_BASE_PACKAGES" value="false" />
     <option name="CUSTOM_BASE_PACKAGES">
-      <module name="asset-loader.main" basePackage="io.github.sgtswagrid.assetloader" />
-      <module name="asset-loader.test" basePackage="io.github.sgtswagrid.assetloader" />
+      <module name="asset-loader.asset-loader-tapir.main" basePackage="io.github.sgtswagrid.assetloader.tapir" />
+      <module name="asset-loader.asset-loader-tapir.test" basePackage="io.github.sgtswagrid.assetloader.tapir" />
+      <module name="asset-loader.asset-loader.main" basePackage="io.github.sgtswagrid.assetloader" />
+      <module name="asset-loader.asset-loader.test" basePackage="io.github.sgtswagrid.assetloader" />
       <module name="assetloader.main" basePackage="io.github.sgtswagrid.assetloader" />
       <module name="assetloader.test" basePackage="io.github.sgtswagrid.assetloader" />
       <module name="root.main" basePackage="org.example" />

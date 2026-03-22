@@ -8,7 +8,9 @@
         <option name="modules">
           <set>
             <option value="C:\Users\Alec\Workspace\asset-loader" />
+            <option value="C:\Users\Alec\Workspace\asset-loader\core" />
             <option value="C:\Users\Alec\Workspace\asset-loader\project" />
+            <option value="C:\Users\Alec\Workspace\asset-loader\tapir" />
           </set>
         </option>
         <option name="resolveSbtClassifiers" value="true" />
