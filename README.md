@@ -16,7 +16,7 @@ This tool is extremely small and minimalistic, with absolutely no bells or whist
 Add the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.1"
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.2"
 ```
 
 ## ⚙️ Example
