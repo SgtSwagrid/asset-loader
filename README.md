@@ -19,7 +19,7 @@ This tool is extremely small and minimalistic, with absolutely no bells or whist
 Add the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.2"
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.3"
 ```
 
 Compiled with Scala `3.8.2`, with no intention to explicitly support older versions.
