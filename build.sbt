@@ -41,7 +41,7 @@ ThisBuild / sonatypeCredentialHost := "central.sonatype.com"
 ThisBuild / publishMavenStyle      := true
 Global / excludeLintKeys ++= Set(name, publishMavenStyle)
 
-lazy val root = (project in file(".")).settings(
+lazy val assetloader = (project in file(".")).settings(
   packagePrefix                          := (ThisBuild / organization).value,
   libraryDependencies += "org.scalameta" %% "munit" % "1.2.4" % Test,
 )
