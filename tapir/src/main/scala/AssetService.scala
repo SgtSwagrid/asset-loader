@@ -41,17 +41,21 @@ class AssetService
     *   [[serverEndpoint]] for the server implementation of this endpoint.
     */
   def publicEndpoint
-    : PublicEndpoint[(List[String], Option[String]), StatusCode, DropNames[Asset], Any] =
-    endpoint
-      .get
-      .in(externalPath)
-      .in(paths)
-      .in(header[Option[String]]("If-None-Match"))
-      .errorOut(statusCode)
-      .out(byteArrayBody)
-      .out(header[String]("Content-Type"))
-      .out(header[String]("ETag"))
-      .out(header[String]("Cache-Control"))
+    : PublicEndpoint[
+      (List[String], Option[String]),
+      StatusCode,
+      DropNames[Asset],
+      Any,
+    ] = endpoint
+    .get
+    .in(externalPath)
+    .in(paths)
+    .in(header[Option[String]]("If-None-Match"))
+    .errorOut(statusCode)
+    .out(byteArrayBody)
+    .out(header[String]("Content-Type"))
+    .out(header[String]("ETag"))
+    .out(header[String]("Cache-Control"))
 
   /**
     * The server implementation for [[publicEndpoint]].
