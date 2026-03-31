@@ -6,7 +6,7 @@
 //   - sbt-sonatype (publishing to Maven Central)
 // It exposes the `ci-release` sbt command used by the GitHub Actions release workflow.
 // https://github.com/sbt/sbt-ci-release
-addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.11.2")
+addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.9.3")
 
 // Allow SBT to configure IntelliJ project settings.
 addSbtPlugin("org.jetbrains.scala" % "sbt-ide-settings" % "1.1.4")
