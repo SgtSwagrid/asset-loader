@@ -25,7 +25,7 @@ import sttp.tapir.server.ServerEndpoint
   */
 class AssetService
   (
-    private val externalPath: String,
+    private val externalPath: EndpointInput[Unit],
     private val internalPath: Path,
     private val maxAge: Int = 0,
   ):
