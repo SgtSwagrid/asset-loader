@@ -1,9 +1,11 @@
-# 💾 asset-loader
-
-[![Build status](https://github.com/SgtSwagrid/asset-loader/actions/workflows/ci.yml/badge.svg)](https://github.com/SgtSwagrid/asset-loader/actions/workflows/ci.yml)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.sgtswagrid/asset-loader_3.svg)](https://search.maven.org/artifact/io.github.sgtswagrid/asset-loader_3)
-
-A simple static asset loader for [Scala](https://www.scala-lang.org/) web servers.
+<div align="center">
+  <h1>💾 Asset Loader</h1>
+  <p>A simple static asset loader for <a href="https://www.scala-lang.org/">Scala</a> web servers.</p>
+  <span>
+    <a href="https://github.com/SgtSwagrid/asset-loader/actions/workflows/ci.yml"><img src="https://github.com/SgtSwagrid/asset-loader/actions/workflows/ci.yml/badge.svg" alt="Build status" /></a>
+    <a href="https://search.maven.org/artifact/io.github.sgtswagrid/asset-loader_3"><img src="https://img.shields.io/maven-central/v/io.github.sgtswagrid/asset-loader_3.svg" alt="Maven Central" /></a>
+  </span>
+</div>
 
 ## ✔️ Features
 
