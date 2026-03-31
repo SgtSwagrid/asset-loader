@@ -2,9 +2,11 @@ import sbt._
 import sbt.Keys._
 import IdeSettings.packagePrefix
 
-lazy val `asset-loader` = (project in file("core")).settings(
-  packagePrefix := "io.github.sgtswagrid.assetloader",
-)
+lazy val `asset-loader` = project
+  .in(file("core"))
+  .settings(
+    packagePrefix := "io.github.sgtswagrid.assetloader",
+  )
 
 lazy val `asset-loader-tapir` = project
   .in(file("tapir"))
