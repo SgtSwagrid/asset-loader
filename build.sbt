@@ -12,5 +12,5 @@ lazy val `asset-loader-tapir` = project
   .settings(
     packagePrefix := "io.github.sgtswagrid.assetloader.tapir",
     libraryDependencies +=
-      "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.13.13",
+      "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.13.14",
   )
