@@ -9,7 +9,7 @@
 addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.11.2")
 
 // Allow SBT to configure IntelliJ project settings.
-addSbtPlugin("org.jetbrains.scala" % "sbt-ide-settings" % "1.1.2")
+addSbtPlugin("org.jetbrains.scala" % "sbt-ide-settings" % "1.1.4")
 
 // Scalafmt is a linter for Scala, supporting automatic code reformatting.
 // See 'https://scalameta.org/scalafmt', and '.scalafmt.conf' in the project root.
