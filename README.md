@@ -24,7 +24,7 @@ Add the following dependency to your `build.sbt`:
 libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.6"
 ```
 
-Compiled with Scala `3.8.2`, with no intention to explicitly support older versions.
+Compiled with Scala `3.8.3`, with no intention to explicitly support older versions.
 
 ## ⚙️ Example
 
