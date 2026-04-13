@@ -1,5 +1,3 @@
-ThisBuild / name           := "Asset Loader"
-ThisBuild / normalizedName := "asset-loader"
 ThisBuild / description := "A simple static asset loader for Scala web servers."
 ThisBuild / homepage := Some(url("https://github.com/SgtSwagrid/asset-loader"))
 

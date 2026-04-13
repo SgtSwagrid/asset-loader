@@ -4,26 +4,26 @@ package io.github.sgtswagrid.assetloader
   * A static asset that can be served by a web server.
   *
   * @param content
-  *   The raw bytes of the asset file.
+  *   The raw bytes from the asset file.
   *
   * @param contentType
-  *   The MIME type of the asset, used for the
+  *   The MIME type of the asset. Appears in the
   *   [`Content-Type`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Type)
   *   header. Helps the browser understand how to handle the file.
   *
-  * @param etag
-  *   An
+  * @param eTag
+  *   The version hash of the asset. Appears in the
   *   [ETag](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/ETag)
-  *   for the asset, to identify the version for caching purposes.
+  *   header. Helps the browser determine when a cached asset is up-to-date.
   *
   * @param cacheControl
-  *   Instructions for how the asset may be cached, used for the
+  *   The caching rules for the asset. Appears in the
   *   [`Cache-Control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control)
-  *   header.
+  *   header. Tells the browser when a cached asset needs to be replaced.
   */
 type Asset = (
   content: Array[Byte],
   contentType: String,
-  etag: String,
+  eTag: String,
   cacheControl: String,
 )

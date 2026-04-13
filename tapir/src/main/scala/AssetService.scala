@@ -1,8 +1,7 @@
 package io.github.sgtswagrid.assetloader.tapir
 
-import io.github.sgtswagrid.assetloader.{Asset, AssetLoader}
+import io.github.sgtswagrid.assetloader.AssetLoader
 import java.nio.file.Path
-import scala.NamedTuple.DropNames
 import sttp.model.StatusCode
 import sttp.tapir.*
 import sttp.tapir.server.ServerEndpoint
@@ -28,34 +27,12 @@ class AssetService
     private val externalPath: EndpointInput[Unit],
     private val internalPath: Path,
     private val maxAge: Int = 0,
-  ):
+  )
+  extends AssetEndpoint(externalPath):
 
   /** The [[AssetLoader]] used to load static assets from the file system. */
   private val assetLoader =
-    AssetLoader(assetsPath = internalPath, maxAge = maxAge)
-
-  /**
-    * The definition for a Tapir endpoint that serves static files.
-    *
-    * @see
-    *   [[serverEndpoint]] for the server implementation of this endpoint.
-    */
-  def publicEndpoint
-    : PublicEndpoint[
-      (List[String], Option[String]),
-      StatusCode,
-      DropNames[Asset],
-      Any,
-    ] = endpoint
-    .get
-    .in(externalPath)
-    .in(paths)
-    .in(header[Option[String]]("If-None-Match"))
-    .errorOut(statusCode)
-    .out(byteArrayBody)
-    .out(header[String]("Content-Type"))
-    .out(header[String]("ETag"))
-    .out(header[String]("Cache-Control"))
+    AssetLoader(assetPath = internalPath, maxAge = maxAge)
 
   /**
     * The server implementation for [[publicEndpoint]].
@@ -67,29 +44,29 @@ class AssetService
     *   Minimal example with [Netty](https://netty.io/) and [Cats
     *   Effect](https://typelevel.org/cats-effect/):
     *   {{{
-    *     object Main extends ResourceApp.Forever:
+    * object Main extends ResourceApp.Forever:
     *
-    *       val assets = AssetService(
-    *         "assets",
-    *         Paths.get("src/main/resources")
-    *       )
+    *   val assets = AssetService(
+    *     "assets",
+    *     Paths.get("src/main/resources")
+    *   )
     *
-    *       def run(args: List[String]) =
+    *   def run(args: List[String]) =
     *
-    *         NettyCatsServer
-    *           .io()
-    *           .flatMap: server =>
-    *             val service = server
-    *               .host("0.0.0.0")
-    *               .port("8080")
-    *               .addEndpoints(assets.serverEndpoint[IO])
-    *             Resource.make(service.start())(_.stop()).as(())
+    *     NettyCatsServer
+    *       .io()
+    *       .flatMap: server =>
+    *         val service = server
+    *           .host("0.0.0.0")
+    *           .port("8080")
+    *           .addEndpoints(assets.serverEndpoint[IO])
+    *         Resource.make(service.start())(_.stop()).as(())
     *   }}}
     */
   def serverEndpoint[F[_]]: ServerEndpoint[Any, F] = publicEndpoint
     .serverLogicPure[F]: (path, ifNoneMatch) =>
       assetLoader.getAsset(path) match
         case None => Left(StatusCode.NotFound)
-        case Some(asset) if ifNoneMatch.contains(asset.etag) =>
+        case Some(asset) if ifNoneMatch.contains(asset.eTag) =>
           Left(StatusCode.NotModified)
         case Some(asset) => Right(asset)
