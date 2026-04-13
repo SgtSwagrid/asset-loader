@@ -77,5 +77,5 @@ object Main extends ResourceApp.Forever:
 
 ## 👁️ See also
 
-- See [Scala Website Template](https://github.com/SgtSwagrid/scala-website-template) for an exmaple template which uses _Asset Loader_ to build a full stack website.
+- See [Scala Website Template](https://github.com/SgtSwagrid/scala-website-template) for an example template which uses _Asset Loader_ to build a full stack website.
 - See [Page Loader](https://github.com/SgtSwagrid/page-loader) for a similar library which loads [Scala.js](https://www.scala-js.org/) webpages instead of static assets.
