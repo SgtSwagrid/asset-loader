@@ -7,28 +7,53 @@ object IdeSettings extends AutoPlugin {
 
   override def trigger = allRequirements
 
-  /** Setting key for defining an implicit package prefix. */
+  /** Setting key for defining an implicit IDE package prefix. */
   lazy val packagePrefix =
-    settingKey[String]("For defining an implicit package prefix.")
+    settingKey[String]("For defining an implicit IDE package prefix.")
 
   override lazy val buildSettings = Seq(
     packagePrefix := "",
 
-    // Exclude build output and other metadata from IDE indexing and project view:
-    ideExcludedDirectories := Seq(
-      // Binary output directories:
-      file("target"),
-      file("project") / "target",
+    // Exclude build output and other metadata from IDE indexing and project view.
+    ideExcludedDirectories := {
 
-      // Build tools:
-      file(".metals"),
-      file(".bsp"),
-      file(".bloop"),
+      // Excluded in any subdirectory:
+      val recursive = Seq("target", ".js", ".jvm").flatMap(name =>
+        (baseDirectory.value ** name).get,
+      )
 
-      // IDEs:
-      file(".idea"),
-      file(".vscode"),
-    ),
+      // Excluded at the root level only:
+      val rootOnly = Seq(
+        // Build tools
+        file(".metals"),
+        file(".bsp"),
+        file(".bloop"),
+        file(".jvmopts"),
+        file("project/project"),
+
+        // IDEs
+        file(".idea"),
+        file(".vscode"),
+        file(".devcontainer"),
+        file(".editorconfig"),
+        file(".scalafmt.conf"),
+
+        // Git
+        file(".gitignore"),
+        file(".gitattributes"),
+        file(".github"),
+        file("LICENSE.md"),
+
+        // Agents
+        file("CLAUDE.md"),
+        file(".claude"),
+        file(".mcp.json"),
+        file(".playwright.mcp"),
+        file(".scala-steward.conf"),
+      )
+
+      recursive ++ rootOnly
+    },
   )
 
   override lazy val projectSettings = Seq(
