@@ -21,7 +21,7 @@ This tool is extremely small and minimalistic, with absolutely no bells or whist
 Add the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.9"
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.10"
 ```
 
 Compiled with Scala `3.8.3`, with no intention to explicitly support older versions.
@@ -57,7 +57,7 @@ Contributions are welcome!
 [Tapir](https://tapir.softwaremill.com/en/latest/) is a library to describe HTTP APIs and expose them as a server. A separate connector is provided to easily create a Tapir endpoint that serves static files from _Asset Loader_. Just add the following additional dependency:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader-tapir" % "0.1.9"
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader-tapir" % "0.1.10"
 ```
 
 Observe the following minimal example, using [Netty](https://netty.io/) and [Cats Effect](https://typelevel.org/cats-effect/):
@@ -90,11 +90,11 @@ For this reason, each aforementioned dependency is published with a common part 
 These can be installed as follows:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %%% "asset-loader-common" % "0.1.9"
+libraryDependencies += "io.github.sgtswagrid" %%% "asset-loader-common" % "0.1.10"
 ```
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %%% "asset-loader-tapir-common" % "0.1.9"
+libraryDependencies += "io.github.sgtswagrid" %%% "asset-loader-tapir-common" % "0.1.10"
 ```
 
 Note that you don't need to explicitly include the above if you only use this library on the server.
