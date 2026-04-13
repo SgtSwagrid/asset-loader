@@ -45,7 +45,7 @@ class AssetService[F[_]]
     *   ```scala
     *   object Main extends ResourceApp.Forever:
     *
-    *     val assets = AssetService(
+    *     val assets = AssetService[IO](
     *       "assets",
     *       Paths.get("src/main/resources"),
     *     )
@@ -58,7 +58,7 @@ class AssetService[F[_]]
     *           val service = server
     *             .host("0.0.0.0")
     *             .port("8080")
-    *             .addEndpoints(assets.serverEndpoint[IO])
+    *             .addEndpoints(assets.serverEndpoint)
     *           Resource.make(service.start())(_.stop()).as(())
     *   ```
     */
