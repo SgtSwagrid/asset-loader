@@ -15,7 +15,7 @@ import sttp.tapir.*
   * @param externalPath
   *   The URL path prefix for the endpoint, e.g. "`assets`".
   */
-class AssetEndpoint(private val externalPath: EndpointInput[Unit]):
+class AssetApi(private val externalPath: EndpointInput[Unit]):
 
   /**
     * The definition for a Tapir endpoint that serves static files.

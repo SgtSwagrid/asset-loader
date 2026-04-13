@@ -30,7 +30,7 @@ class AssetService[F[_]]
     private val internalPath: Path,
     private val maxAge: Int = 0,
   )
-  extends AssetEndpoint(externalPath), Service[Any, F]("Asset Service", "1.0"):
+  extends AssetApi(externalPath), TapirService[Any, F]("Asset Service", "1.0"):
 
   /** The [[AssetLoader]] used to load static assets from the file system. */
   private val assetLoader =

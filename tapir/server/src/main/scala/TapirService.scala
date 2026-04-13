@@ -20,7 +20,7 @@ import sttp.tapir.swagger.bundle.SwaggerInterpreter
   * @tparam F
   *   The effect type (e.g. `Future` or `IO`).
   */
-trait Service[Capabilities, F[_]]
+trait TapirService[Capabilities, F[_]]
   (
     serviceName: String,
     serviceVersion: String,
