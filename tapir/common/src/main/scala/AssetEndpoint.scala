@@ -7,7 +7,7 @@ import sttp.tapir.*
 
 /**
   * A [Tapir](https://tapir.softwaremill.com/en/latest/) endpoint definition for
-  * serving static assets
+  * serving static assets.
   *
   * This is the cross-platform base for [[AssetService]], which adds the
   * server-side logic on JVM.
