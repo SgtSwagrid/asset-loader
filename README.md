@@ -51,7 +51,7 @@ def handleRequest(request: Request): Response =
 [Tapir](https://tapir.softwaremill.com/en/latest/) is a library to describe HTTP APIs and expose them as a server. A separate connector is provided to easily create a Tapir endpoint that serves static files from `asset-loader`. Just add the following additional dependency:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader-tapir" % "0.1.5"
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader-tapir" % "0.1.6"
 ```
 
 Observe the following minimal example, using [Netty](https://netty.io/) and [Cats Effect](https://typelevel.org/cats-effect/):
