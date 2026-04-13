@@ -4,7 +4,6 @@ import io.github.sgtswagrid.assetloader.AssetLoader
 import java.nio.file.Path
 import sttp.model.StatusCode
 import sttp.tapir.*
-import sttp.tapir.server.ServerEndpoint
 
 /**
   * A [Tapir](https://tapir.softwaremill.com/en/latest/) service for serving
@@ -21,14 +20,17 @@ import sttp.tapir.server.ServerEndpoint
   * @param maxAge
   *   The maximum age (in seconds) for which an asset should be considered fresh
   *   for caching purposes. Caching is disabled by default (`0`).
+  *
+  * @tparam F
+  *   The effect type (e.g. `Future` or `IO`).
   */
-class AssetService
+class AssetService[F[_]]
   (
     private val externalPath: EndpointInput[Unit],
     private val internalPath: Path,
     private val maxAge: Int = 0,
   )
-  extends AssetEndpoint(externalPath):
+  extends AssetEndpoint(externalPath), Service[Any, F]("Asset Service", "1.0"):
 
   /** The [[AssetLoader]] used to load static assets from the file system. */
   private val assetLoader =
@@ -36,9 +38,6 @@ class AssetService
 
   /**
     * The server implementation for [[publicEndpoint]].
-    *
-    * @tparam F
-    *   The effect type of the server logic, e.g. `Future` or `IO`.
     *
     * @example
     *   Minimal example with [Netty](https://netty.io/) and [Cats
@@ -63,10 +62,12 @@ class AssetService
     *         Resource.make(service.start())(_.stop()).as(())
     *   }}}
     */
-  def serverEndpoint[F[_]]: ServerEndpoint[Any, F] = publicEndpoint
-    .serverLogicPure[F]: (path, ifNoneMatch) =>
+  final def serverEndpoint: Endpoint = publicEndpoint.serverLogicPure[F]:
+    (path, ifNoneMatch) =>
       assetLoader.getAsset(path) match
         case None => Left(StatusCode.NotFound)
         case Some(asset) if ifNoneMatch.contains(asset.eTag) =>
           Left(StatusCode.NotModified)
         case Some(asset) => Right(asset)
+
+  override final def api: List[Endpoint] = List(serverEndpoint)

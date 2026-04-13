@@ -20,7 +20,13 @@ lazy val `asset-loader-tapir` = project
     `asset-loader`,
     `asset-loader-tapir-common`.jvm,
   )
-  .settings(packagePrefix := "io.github.sgtswagrid.assetloader.tapir")
+  .settings(
+    packagePrefix := "io.github.sgtswagrid.assetloader.tapir",
+    libraryDependencies ++= Seq(
+      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.15",
+      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.15",
+    ),
+  )
 
 lazy val `asset-loader-tapir-common`: CrossProject =
   crossProject(JSPlatform, JVMPlatform)
