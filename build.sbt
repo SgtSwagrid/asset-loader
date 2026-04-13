@@ -4,18 +4,18 @@ import sbt.Keys.*
 import sbtcrossproject.CrossProject
 
 lazy val `asset-loader` = project
-  .in(file("core"))
+  .in(file("core/server"))
   .dependsOn(`asset-loader-common`.jvm)
   .settings(packagePrefix := "io.github.sgtswagrid.assetloader")
 
 lazy val `asset-loader-common`: CrossProject =
   crossProject(JSPlatform, JVMPlatform)
     .crossType(CrossType.Pure)
-    .in(file("common"))
+    .in(file("core/common"))
     .settings(packagePrefix := "io.github.sgtswagrid.assetloader")
 
 lazy val `asset-loader-tapir` = project
-  .in(file("tapir"))
+  .in(file("tapir/server"))
   .dependsOn(
     `asset-loader`,
     `asset-loader-tapir-common`.jvm,
@@ -25,7 +25,7 @@ lazy val `asset-loader-tapir` = project
 lazy val `asset-loader-tapir-common`: CrossProject =
   crossProject(JSPlatform, JVMPlatform)
     .crossType(CrossType.Pure)
-    .in(file("tapir-common"))
+    .in(file("tapir/common"))
     .dependsOn(`asset-loader-common`)
     .settings(
       packagePrefix := "io.github.sgtswagrid.assetloader.tapir",

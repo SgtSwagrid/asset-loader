@@ -1,10 +1,11 @@
 package io.github.sgtswagrid.assetloader.tapir
 
 import io.github.sgtswagrid.assetloader.AssetLoader
-import java.nio.file.Path
 import sttp.model.StatusCode
 import sttp.tapir.*
 import sttp.tapir.server.ServerEndpoint
+
+import java.nio.file.Path
 
 /**
   * A [Tapir](https://tapir.softwaremill.com/en/latest/) service for serving
