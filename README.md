@@ -21,7 +21,7 @@ This tool is extremely small and minimalistic, with absolutely no bells or whist
 Add the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.6"
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.7"
 ```
 
 Compiled with Scala `3.8.3`, with no intention to explicitly support older versions.
@@ -46,12 +46,18 @@ def handleRequest(request: Request): Response =
     // ...
 ```
 
-## 🦡 Tapir Integration
+## 📡 Server Integration 
+
+Currently, a connector exists for only a single web framework: Tapir.
+In principle, any future connectors will be published as separate dependencies with the name `asset-loader-{web-framework}`.
+Contributions are welcome!
+
+### Tapir
 
 [Tapir](https://tapir.softwaremill.com/en/latest/) is a library to describe HTTP APIs and expose them as a server. A separate connector is provided to easily create a Tapir endpoint that serves static files from `asset-loader`. Just add the following additional dependency:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader-tapir" % "0.1.6"
+libraryDependencies += "io.github.sgtswagrid" %% "asset-loader-tapir" % "0.1.7"
 ```
 
 Observe the following minimal example, using [Netty](https://netty.io/) and [Cats Effect](https://typelevel.org/cats-effect/):
@@ -74,6 +80,25 @@ object Main extends ResourceApp.Forever:
           .addEndpoints(assets.serverEndpoint[IO])
         Resource.make(service.start())(_.stop()).as(())
 ```
+
+## 🖥️ Client Versions
+
+All of the above dependencies are exclusively for the JVM.
+However, you may wish to access the non-JVM-specific functionality from the client as well.
+For this reason, each aforementioned dependency is published with a common part that is cross-compiled.
+
+These can be installed as follows:
+
+```scala
+libraryDependencies += "io.github.sgtswagrid" %%% "asset-loader-common" % "0.1.7"
+```
+
+```scala
+libraryDependencies += "io.github.sgtswagrid" %%% "asset-loader-tapir-common" % "0.1.7"
+```
+
+Note that you don't need to explicitly include the above if you only use this library on the server.
+
 
 ## 👁️ See also
 
