@@ -65,7 +65,7 @@ Observe the following minimal example, using [Netty](https://netty.io/) and [Cat
 ```scala
 object Main extends ResourceApp.Forever:
 
-  val assets = AssetService(
+  val assets = AssetService[IO](
     externalPath = "assets",
     internalPath = Paths.get("src/main/resources"),
   )
@@ -77,7 +77,7 @@ object Main extends ResourceApp.Forever:
         val service = server
           .host("0.0.0.0")
           .port("8080")
-          .addEndpoints(assets.serverEndpoint[IO])
+          .addEndpoints(assets.api)
         Resource.make(service.start())(_.stop()).as(())
 ```
 

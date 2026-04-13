@@ -33,13 +33,12 @@ trait Service[Capabilities, F[_]]
   def api: List[Endpoint]
 
   /** [Swagger](https://swagger.io/) documentation for this service. */
-  final lazy val docs: List[Endpoint] = SwaggerInterpreter()
-    .fromServerEndpoints(api, serviceName, serviceVersion)
+  lazy val docs: List[Endpoint] =
+    SwaggerInterpreter().fromServerEndpoints(api, serviceName, serviceVersion)
 
   /** [Prometheus](https://prometheus.io/) metrics for this service. */
-  final lazy val metrics: Endpoint = PrometheusMetrics
-    .default[F]()
-    .metricsEndpoint
+  lazy val metrics: List[Endpoint] =
+    List(PrometheusMetrics.default[F]().metricsEndpoint)
 
   /** All endpoints combined from [[api]], [[docs]], and [[metrics]]. */
-  final lazy val all: List[Endpoint] = api ++ docs :+ metrics
+  lazy val all: List[Endpoint] = api ++ docs ++ metrics

@@ -42,25 +42,25 @@ class AssetService[F[_]]
     * @example
     *   Minimal example with [Netty](https://netty.io/) and [Cats
     *   Effect](https://typelevel.org/cats-effect/):
-    *   {{{
-    * object Main extends ResourceApp.Forever:
+    *   ```scala
+    *   object Main extends ResourceApp.Forever:
     *
-    *   val assets = AssetService(
-    *     "assets",
-    *     Paths.get("src/main/resources")
-    *   )
+    *     val assets = AssetService(
+    *       "assets",
+    *       Paths.get("src/main/resources"),
+    *     )
     *
-    *   def run(args: List[String]) =
+    *     def run(args: List[String]) =
     *
-    *     NettyCatsServer
-    *       .io()
-    *       .flatMap: server =>
-    *         val service = server
-    *           .host("0.0.0.0")
-    *           .port("8080")
-    *           .addEndpoints(assets.serverEndpoint[IO])
-    *         Resource.make(service.start())(_.stop()).as(())
-    *   }}}
+    *       NettyCatsServer
+    *         .io()
+    *         .flatMap: server =>
+    *           val service = server
+    *             .host("0.0.0.0")
+    *             .port("8080")
+    *             .addEndpoints(assets.serverEndpoint[IO])
+    *           Resource.make(service.start())(_.stop()).as(())
+    *   ```
     */
   final def serverEndpoint: Endpoint = publicEndpoint.serverLogicPure[F]:
     (path, ifNoneMatch) =>
