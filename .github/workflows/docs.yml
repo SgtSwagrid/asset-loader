@@ -1,6 +1,6 @@
 # Generate and publish Scaladoc to GitHub Pages upon release.
 
-name: Docs
+name: Documentation
 
 on:
   release:
