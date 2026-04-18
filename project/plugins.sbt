@@ -13,7 +13,7 @@ addSbtPlugin("org.jetbrains.scala" % "sbt-ide-settings" % "1.1.4")
 
 // Scalafmt is a linter for Scala, supporting automatic code reformatting.
 // See 'https://scalameta.org/scalafmt', and '.scalafmt.conf' in the project root.
-addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.5.6")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.6.0")
 
 // For transpilation into JavaScript.
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.21.0")
