@@ -1,9 +1,7 @@
-ThisBuild / name           := "Asset Loader"
-ThisBuild / normalizedName := "asset-loader"
 ThisBuild / description := "A simple static asset loader for Scala web servers."
 ThisBuild / homepage := Some(url("https://github.com/SgtSwagrid/asset-loader"))
 
-ThisBuild / organization         := "io.github.sgtswagrid"
+ThisBuild / organization         := "com.alecdorrington"
 ThisBuild / organizationName     := "SgtSwagrid"
 ThisBuild / organizationHomepage := Some(url("https://github.com/SgtSwagrid"))
 
@@ -15,7 +13,7 @@ ThisBuild / licenses :=
 
 ThisBuild / scmInfo := Some(ScmInfo(
   url("https://github.com/SgtSwagrid/asset-loader"),
-  "scm:git@github.com:SgtSwagrid/asset-loader.git",
+  "scm:git@github.com/SgtSwagrid/asset-loader.git",
 ))
 
 ThisBuild / developers := List(Developer(

@@ -57,6 +57,9 @@ Currently, the only connector is for [Tapir](https://tapir.softwaremill.com/en/l
 - Never use the `implicit` keyword, always prefer `given` and `using` instead.
 - Format with `sbt scalafmtAll` before committing. In general, match your style to that defined in `.scalafmt.conf`.
 - When in doubt, follow the style of existing code in the repository.
+- Avoid qualified names when there is no reason to use them. Write e.g. `AdditiveMonoid` instead of `structures.AdditiveMonoid`, and add a proper import statement instead.
+  - Exception 1: Things nested inside singleton objects, where the name in unclear without the object name as context.
+  - Exception 2: When multiple libraries have similar sets of names on account of representing similar ideas from a different angle.
 
 #### Naming conventions
 
