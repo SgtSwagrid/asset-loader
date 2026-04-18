@@ -3,7 +3,7 @@
   <p>A simple static asset loader for <a href="https://www.scala-lang.org/">Scala</a> web servers.</p>
   <span>
     <a href="https://github.com/SgtSwagrid/asset-loader/actions/workflows/build-integrity.yml"><img src="https://github.com/SgtSwagrid/asset-loader/actions/workflows/build-integrity.yml/badge.svg" alt="Build status" /></a>
-    <a href="https://search.maven.org/artifact/io.github.sgtswagrid/asset-loader_3"><img src="https://img.shields.io/maven-central/v/io.github.sgtswagrid/asset-loader_3.svg" alt="Maven Central" /></a>
+    <a href="https://search.maven.org/artifact/com.alecdorrington/asset-loader_3"><img src="https://img.shields.io/maven-central/v/com.alecdorrington/asset-loader_3.svg" alt="Maven Central" /></a>
   </span>
 </div>
 
@@ -21,7 +21,7 @@ This tool is extremely small and minimalistic, with absolutely no bells or whist
 Add the following dependency to your `build.sbt`:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader" % "0.1.10"
+libraryDependencies += "com.alecdorrington" %% "asset-loader" % "0.1.10"
 ```
 
 Compiled with Scala `3.8.3`, with no intention to explicitly support older versions.
@@ -32,7 +32,7 @@ This example uses fake `Request` and `Response` types to illustrate the idea in 
 The details will depend on your choice of web framework (e.g. [Tapir](https://tapir.softwaremill.com/en/latest/) or [http4s](https://http4s.org/)).
 
 ```scala
-import io.github.sgtswagrid.assetloader.{Asset, AssetLoader}
+import com.alecdorrington.assetloader.{Asset, AssetLoader}
 
 val assetLoader = AssetLoader(assetsPath = "client/src/main/resources")
 
@@ -57,7 +57,7 @@ Contributions are welcome!
 [Tapir](https://tapir.softwaremill.com/en/latest/) is a library to describe HTTP APIs and expose them as a server. A separate connector is provided to easily create a Tapir endpoint that serves static files from _Asset Loader_. Just add the following additional dependency:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %% "asset-loader-tapir" % "0.1.10"
+libraryDependencies += "com.alecdorrington" %% "asset-loader-tapir" % "0.1.10"
 ```
 
 Observe the following minimal example, using [Netty](https://netty.io/) and [Cats Effect](https://typelevel.org/cats-effect/):
@@ -90,11 +90,11 @@ For this reason, each aforementioned dependency is published with a common part 
 These can be installed as follows:
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %%% "asset-loader-common" % "0.1.10"
+libraryDependencies += "com.alecdorrington" %%% "asset-loader-common" % "0.1.10"
 ```
 
 ```scala
-libraryDependencies += "io.github.sgtswagrid" %%% "asset-loader-tapir-common" % "0.1.10"
+libraryDependencies += "com.alecdorrington" %%% "asset-loader-tapir-common" % "0.1.10"
 ```
 
 Note that you don't need to explicitly include the above if you only use this library on the server.

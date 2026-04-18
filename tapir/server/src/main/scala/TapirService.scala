@@ -1,4 +1,4 @@
-package io.github.sgtswagrid.assetloader.tapir
+package com.alecdorrington.assetloader.tapir
 
 import sttp.tapir.server.ServerEndpoint
 import sttp.tapir.server.metrics.prometheus.PrometheusMetrics

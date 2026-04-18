@@ -1,4 +1,4 @@
-package io.github.sgtswagrid.assetloader
+package com.alecdorrington.assetloader
 
 import java.nio.file.*
 import java.security.MessageDigest

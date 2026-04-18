@@ -1,6 +1,6 @@
-package io.github.sgtswagrid.assetloader.tapir
+package com.alecdorrington.assetloader.tapir
 
-import io.github.sgtswagrid.assetloader.AssetLoader
+import com.alecdorrington.assetloader.AssetLoader
 import java.nio.file.Path
 import sttp.model.StatusCode
 import sttp.tapir.*

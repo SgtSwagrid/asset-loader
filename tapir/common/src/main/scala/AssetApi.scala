@@ -1,6 +1,6 @@
-package io.github.sgtswagrid.assetloader.tapir
+package com.alecdorrington.assetloader.tapir
 
-import io.github.sgtswagrid.assetloader.Asset
+import com.alecdorrington.assetloader.Asset
 import scala.NamedTuple.DropNames
 import sttp.model.StatusCode
 import sttp.tapir.*

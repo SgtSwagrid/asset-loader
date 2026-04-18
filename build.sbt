@@ -6,13 +6,13 @@ import sbtcrossproject.CrossProject
 lazy val `asset-loader` = project
   .in(file("core/server"))
   .dependsOn(`asset-loader-common`.jvm)
-  .settings(packagePrefix := "io.github.sgtswagrid.assetloader")
+  .settings(packagePrefix := "com.alecdorrington.assetloader")
 
 lazy val `asset-loader-common`: CrossProject =
   crossProject(JSPlatform, JVMPlatform)
     .crossType(CrossType.Pure)
     .in(file("core/common"))
-    .settings(packagePrefix := "io.github.sgtswagrid.assetloader")
+    .settings(packagePrefix := "com.alecdorrington.assetloader")
 
 lazy val `asset-loader-tapir` = project
   .in(file("tapir/server"))
@@ -21,7 +21,7 @@ lazy val `asset-loader-tapir` = project
     `asset-loader-tapir-common`.jvm,
   )
   .settings(
-    packagePrefix := "io.github.sgtswagrid.assetloader.tapir",
+    packagePrefix := "com.alecdorrington.assetloader.tapir",
     libraryDependencies ++= Seq(
       "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.15",
       "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.15",
@@ -34,7 +34,7 @@ lazy val `asset-loader-tapir-common`: CrossProject =
     .in(file("tapir/common"))
     .dependsOn(`asset-loader-common`)
     .settings(
-      packagePrefix := "io.github.sgtswagrid.assetloader.tapir",
+      packagePrefix := "com.alecdorrington.assetloader.tapir",
       libraryDependencies +=
         "com.softwaremill.sttp.tapir" %%% "tapir-core" % "1.13.15",
     )

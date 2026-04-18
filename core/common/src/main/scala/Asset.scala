@@ -1,4 +1,4 @@
-package io.github.sgtswagrid.assetloader
+package com.alecdorrington.assetloader
 
 /**
   * A static asset that can be served by a web server.
