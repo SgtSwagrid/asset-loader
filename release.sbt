@@ -13,7 +13,7 @@ ThisBuild / licenses :=
 
 ThisBuild / scmInfo := Some(ScmInfo(
   url("https://github.com/SgtSwagrid/asset-loader"),
-  "scm:git@github.com:SgtSwagrid/asset-loader.git",
+  "scm:git@github.com/SgtSwagrid/asset-loader.git",
 ))
 
 ThisBuild / developers := List(Developer(
