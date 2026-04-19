@@ -53,4 +53,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ env.docs_dir }}
           publish_branch: docs
+          destination_dir: asset-loader
           cname: ${{ vars.SCALADOC_CNAME }}
