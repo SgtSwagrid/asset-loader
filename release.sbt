@@ -11,11 +11,6 @@ ThisBuild / versionScheme := Some("strict")
 ThisBuild / licenses :=
   List("MIT" -> url("https://opensource.org/licenses/MIT"))
 
-ThisBuild / scmInfo := Some(ScmInfo(
-  url("https://github.com/SgtSwagrid/asset-loader"),
-  "scm:git@github.com/SgtSwagrid/asset-loader.git",
-))
-
 ThisBuild / developers := List(Developer(
   id = "SgtSwagrid",
   name = "Alec Dorrington",
