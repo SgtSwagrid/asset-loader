@@ -8,6 +8,12 @@
   </span>
 </div>
 
+<br/><br/>
+
+> "The more you sweat in peace, the less you bleed in war." — Norman Schwarzkopf.
+
+<br/>
+
 ## ✔️ Features
 
 This tool is extremely small and minimalistic, with absolutely no bells or whistles.
