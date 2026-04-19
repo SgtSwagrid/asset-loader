@@ -27,6 +27,15 @@ All work happens on short-lived feature branches, which are merged into `main` b
 Releases are by [tag](https://docs.github.com/en/repositories/releasing-projects-on-github/viewing-your-repositorys-releases-and-tags),
 and there are no separate release branches.
 
+## 📢 Publishing Workflow
+
+GitHub releases are automatically published to [Maven Central](https://central.sonatype.com/) upon creation, using [sbt-dynver](https://github.com/sbt/sbt-dynver).
+
+### Example
+
+To release version `1.2.3`, go to **Releases → Draft a new release**, create the tag `v1.2.3`, and click **Publish release**.
+Note the inclusion of `v` in the GitHub release name but not the resulting Maven version.
+
 ## 🤖 LLM Agent Usage
 
 The use of agents where it makes sense is allowed and encouraged.
