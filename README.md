@@ -4,7 +4,7 @@
   <span>
     <a href="https://github.com/SgtSwagrid/asset-loader/actions/workflows/build-integrity.yml"><img src="https://github.com/SgtSwagrid/asset-loader/actions/workflows/build-integrity.yml/badge.svg" alt="Build status" /></a>
     <a href="https://search.maven.org/artifact/com.alecdorrington/asset-loader_3"><img src="https://img.shields.io/maven-central/v/com.alecdorrington/asset-loader_3.svg" alt="Maven Central" /></a>
-    <a href="https://docs.alecdorrington.com/asset-loader"><img src="https://img.shields.io/badge/docs-latest-blue.svg" alt="Documentation" /></a>
+    <a href="https://alecdorrington.com/asset-loader"><img src="https://img.shields.io/badge/docs-latest-blue.svg" alt="Documentation" /></a>
   </span>
 </div>
 
