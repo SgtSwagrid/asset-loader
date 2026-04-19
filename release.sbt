@@ -17,3 +17,7 @@ ThisBuild / developers := List(Developer(
   email = "alecdorrington@gmail.com",
   url = url("https://github.com/SgtSwagrid"),
 ))
+
+// Target the Sonatype Central Portal (https://central.sonatype.com).
+// Requires SONATYPE_USERNAME and SONATYPE_PASSWORD as GitHub secrets or environment variables.
+ThisBuild / sonatypeCredentialHost := "central.sonatype.com"
