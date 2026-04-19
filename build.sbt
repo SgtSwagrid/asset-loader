@@ -16,6 +16,9 @@ lazy val root = project
     `asset-loader-tapir-common`.jvm,
     `asset-loader-tapir-common`.js,
   )
+  .settings(
+    ScalaUnidoc / unidoc / scalacOptions ++= Seq("-project", "Asset Loader"),
+  )
 
 lazy val `asset-loader` = project
   .in(file("core/server"))
@@ -37,8 +40,8 @@ lazy val `asset-loader-tapir` = project
   .settings(
     packagePrefix := "com.alecdorrington.assetloader.tapir",
     libraryDependencies ++= Seq(
-      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.15",
-      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.15",
+      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.16",
+      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.16",
     ),
   )
 
