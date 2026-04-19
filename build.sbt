@@ -2,6 +2,20 @@ import IdeSettings.packagePrefix
 import sbt.*
 import sbt.Keys.*
 import sbtcrossproject.CrossProject
+import sbtunidoc.BaseUnidocPlugin.autoImport.*
+import sbtunidoc.ScalaUnidocPlugin
+
+lazy val root = project
+  .in(file("."))
+  .aggregate(
+    `asset-loader`,
+    `asset-loader-common`.jvm,
+    `asset-loader-common`.js,
+    `asset-loader-tapir`,
+    `asset-loader-tapir-common`.jvm,
+    `asset-loader-tapir-common`.js,
+  )
+  .enablePlugins(ScalaUnidocPlugin)
 
 lazy val `asset-loader` = project
   .in(file("core/server"))

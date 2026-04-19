@@ -43,8 +43,8 @@ jobs:
       - name: Generate Scaladoc
         id: generate-docs
         run: |
-          sbt doc
-          echo "docs_dir=$(find target/scala-*/api -maxdepth 0 -type d | head -1)" >> "$GITHUB_ENV"
+          sbt unidoc
+          echo "docs_dir=$(find target/scala-*/unidoc -maxdepth 0 -type d | head -1)" >> "$GITHUB_ENV"
 
       - name: Publish to GitHub Pages
         id: publish-docs
