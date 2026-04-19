@@ -8,6 +8,3 @@
 // It exposes the `ci-release` sbt command used by the GitHub Actions release workflow.
 // https://github.com/sbt/sbt-ci-release
 addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.9.3")
-
-// For aggregating Scaladoc across all subprojects into a single site.
-addSbtPlugin("com.github.sbt" % "sbt-unidoc" % "0.6.1")
