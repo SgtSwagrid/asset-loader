@@ -7,6 +7,7 @@ import sbtunidoc.ScalaUnidocPlugin
 
 lazy val root = project
   .in(file("."))
+  .enablePlugins(ScalaUnidocPlugin)
   .aggregate(
     `asset-loader`,
     `asset-loader-common`.jvm,
@@ -15,7 +16,6 @@ lazy val root = project
     `asset-loader-tapir-common`.jvm,
     `asset-loader-tapir-common`.js,
   )
-  .enablePlugins(ScalaUnidocPlugin)
 
 lazy val `asset-loader` = project
   .in(file("core/server"))
