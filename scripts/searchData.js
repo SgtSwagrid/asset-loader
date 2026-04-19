@@ -1,4 +1,4 @@
-pages = [{"l":"index.html#","e":false,"i":"","n":"root","t":"root","d":"","k":"static","x":""},
+pages = [{"l":"index.html#","e":false,"i":"","n":"Asset Loader","t":"Asset Loader","d":"","k":"static","x":""},
 {"l":"com/alecdorrington/assetloader.html#","e":false,"i":"","n":"com.alecdorrington.assetloader","t":"com.alecdorrington.assetloader","d":"","k":"package","x":""},
 {"l":"com/alecdorrington/assetloader.html#Asset-0","e":false,"i":"","n":"Asset","t":"Asset = (content: Array[Byte], contentType: String, eTag: String, cacheControl: String)","d":"com.alecdorrington.assetloader","k":"type","x":""},
 {"l":"com/alecdorrington/assetloader/tapir.html#","e":false,"i":"","n":"com.alecdorrington.assetloader.tapir","t":"com.alecdorrington.assetloader.tapir","d":"","k":"package","x":""},
