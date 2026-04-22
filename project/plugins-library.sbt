@@ -7,4 +7,4 @@
 //   - sbt-sonatype (publishing to Maven Central)
 // It exposes the `ci-release` sbt command used by the GitHub Actions release workflow.
 // https://github.com/sbt/sbt-ci-release
-addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.9.3")
+addSbtPlugin("com.github.sbt" % "sbt-ci-release" % "1.11.2")

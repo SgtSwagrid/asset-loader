@@ -4,11 +4,6 @@ on:
   release:
     types: [published]
 
-# Cancel in-progress runs when starting a new one.
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
 
   # Publish artefacts to Maven Central.
