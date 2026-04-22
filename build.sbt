@@ -53,5 +53,5 @@ lazy val `asset-loader-tapir-common`: CrossProject =
     .settings(
       packagePrefix := "com.alecdorrington.assetloader.tapir",
       libraryDependencies +=
-        "com.softwaremill.sttp.tapir" %%% "tapir-core" % "1.13.15",
+        "com.softwaremill.sttp.tapir" %%% "tapir-core" % "1.13.16",
     )
