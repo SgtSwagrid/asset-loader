@@ -40,8 +40,8 @@ lazy val `asset-loader-tapir` = project
   .settings(
     packagePrefix := "com.alecdorrington.assetloader.tapir",
     libraryDependencies ++= Seq(
-      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.16",
-      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.16",
+      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.30",
+      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.30",
     ),
   )
 
@@ -53,5 +53,5 @@ lazy val `asset-loader-tapir-common`: CrossProject =
     .settings(
       packagePrefix := "com.alecdorrington.assetloader.tapir",
       libraryDependencies +=
-        "com.softwaremill.sttp.tapir" %%% "tapir-core" % "1.13.16",
+        "com.softwaremill.sttp.tapir" %%% "tapir-core" % "1.13.30",
     )
