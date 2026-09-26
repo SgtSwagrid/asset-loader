@@ -21,10 +21,10 @@ jobs:
     steps:
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           java-version: "21"
           distribution: "temurin"
@@ -37,7 +37,7 @@ jobs:
         run: sbt scalafmtCheckAll
 
       - name: Build
-        run: sbt 'set ThisBuild / scalacOptions += "-Werror"' compile
+        run: sbt 'set ThisBuild / scalacOptions += "-Werror"; compile'
 
       - name: Test
         run: sbt test
