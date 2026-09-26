@@ -5,7 +5,7 @@ ThisBuild / organization         := "com.alecdorrington"
 ThisBuild / organizationName     := "SgtSwagrid"
 ThisBuild / organizationHomepage := Some(url("https://github.com/SgtSwagrid"))
 
-ThisBuild / scalaVersion  := "3.8.3"
+ThisBuild / scalaVersion  := "3.8.4"
 ThisBuild / versionScheme := Some("strict")
 
 ThisBuild / licenses :=
