@@ -1,57 +1,83 @@
 import IdeSettings.packagePrefix
 import sbt.*
 import sbt.Keys.*
-import sbtcrossproject.CrossProject
 import sbtunidoc.BaseUnidocPlugin.autoImport.*
 import sbtunidoc.ScalaUnidocPlugin
+
+val scala3 = "3.9.0"
+
+ThisBuild / scalaVersion := scala3
 
 lazy val root = project
   .in(file("."))
   .enablePlugins(ScalaUnidocPlugin)
   .aggregate(
-    `asset-loader`,
-    `asset-loader-common`.jvm,
-    `asset-loader-common`.js,
-    `asset-loader-tapir`,
-    `asset-loader-tapir-common`.jvm,
-    `asset-loader-tapir-common`.js,
+    (`asset-loader-common`.projectRefs ++
+      `asset-loader-tapir-common`.projectRefs ++
+      Seq[ProjectReference](`asset-loader`, `asset-loader-tapir`)) *,
   )
   .settings(
+    // Scaladoc is aggregated from the JVM side alone, as the JS side would
+    // only document the shared sources a second time:
+    ScalaUnidoc / unidoc / unidocProjectFilter := inProjects(
+      `asset-loader`,
+      `asset-loader-common`.jvm(scala3),
+      `asset-loader-tapir`,
+      `asset-loader-tapir-common`.jvm(scala3),
+    ),
     ScalaUnidoc / unidoc / scalacOptions ++= Seq("-project", "Asset Loader"),
   )
 
 lazy val `asset-loader` = project
   .in(file("core/server"))
-  .dependsOn(`asset-loader-common`.jvm)
-  .settings(packagePrefix := "com.alecdorrington.assetloader")
+  .dependsOn(`asset-loader-common`.jvm(scala3))
+  .settings(
+    name          := "asset-loader",
+    packagePrefix := "com.alecdorrington.assetloader",
+  )
 
-lazy val `asset-loader-common`: CrossProject =
-  crossProject(JSPlatform, JVMPlatform)
-    .crossType(CrossType.Pure)
-    .in(file("core/common"))
-    .settings(packagePrefix := "com.alecdorrington.assetloader")
+/** Cross-compiled for JVM and JS. */
+lazy val `asset-loader-common` = projectMatrix
+  .in(file("core/common"))
+  .settings(
+    name          := "asset-loader-common",
+    packagePrefix := "com.alecdorrington.assetloader",
+
+    // sbt 2.0.x resolves a matrix's sources against the working directory,
+    // so they are pinned to this build's own base:
+    sourceDirectory := (ThisBuild / baseDirectory).value / "core" / "common" / "src",
+  )
+  .jvmPlatform(scalaVersions = Seq(scala3))
+  .jsPlatform(scalaVersions = Seq(scala3))
 
 lazy val `asset-loader-tapir` = project
   .in(file("tapir/server"))
   .dependsOn(
     `asset-loader`,
-    `asset-loader-tapir-common`.jvm,
+    `asset-loader-tapir-common`.jvm(scala3),
   )
   .settings(
+    name          := "asset-loader-tapir",
     packagePrefix := "com.alecdorrington.assetloader.tapir",
     libraryDependencies ++= Seq(
-      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.31",
-      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.31",
+      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.32",
+      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.32",
     ),
   )
 
-lazy val `asset-loader-tapir-common`: CrossProject =
-  crossProject(JSPlatform, JVMPlatform)
-    .crossType(CrossType.Pure)
-    .in(file("tapir/common"))
-    .dependsOn(`asset-loader-common`)
-    .settings(
-      packagePrefix := "com.alecdorrington.assetloader.tapir",
-      libraryDependencies +=
-        "com.softwaremill.sttp.tapir" %%% "tapir-core" % "1.13.31",
-    )
+/** Cross-compiled for JVM and JS. */
+lazy val `asset-loader-tapir-common` = projectMatrix
+  .in(file("tapir/common"))
+  .dependsOn(`asset-loader-common`)
+  .settings(
+    name          := "asset-loader-tapir-common",
+    packagePrefix := "com.alecdorrington.assetloader.tapir",
+
+    // sbt 2.0.x resolves a matrix's sources against the working directory,
+    // so they are pinned to this build's own base:
+    sourceDirectory := (ThisBuild / baseDirectory).value / "tapir" / "common" / "src",
+    libraryDependencies +=
+      "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.13.32",
+  )
+  .jvmPlatform(scalaVersions = Seq(scala3))
+  .jsPlatform(scalaVersions = Seq(scala3))
