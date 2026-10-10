@@ -29,7 +29,7 @@ and there are no separate release branches.
 
 ## 📢 Publishing Workflow
 
-GitHub releases are automatically published to [Maven Central](https://central.sonatype.com/) upon creation, using [sbt-dynver](https://github.com/sbt/sbt-dynver).
+GitHub releases are automatically published to [Maven Central](https://central.sonatype.com/) upon creation, using [sbt-ci-release](https://github.com/sbt/sbt-ci-release), which takes the version from the release's tag.
 
 ### Example
 
@@ -59,6 +59,6 @@ For questions or issues, please use the GitHub issue tracker.
 
 ## 🔁 Origin
 
-The primary source of truth for this document can be found in the [Scala Config](https://github.com/SgtSwagrid/scala-config) repository,
+The primary source of truth for this document can be found in the [Scala Library Config](https://github.com/SgtSwagrid/scala-library-config) repository,
 from which it is automatically synchronised with [Github Graph](https://github.com/SgtSwagrid/github-graph).
 This should be updated there rather than here, lest any changes be subsequently reverted.
