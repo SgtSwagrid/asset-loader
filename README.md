@@ -31,7 +31,7 @@ Add the following dependency to your `build.sbt`:
 libraryDependencies += "com.alecdorrington" %% "asset-loader" % "0.2.5"
 ```
 
-Compiled with Scala `3.8.3`, with no intention to explicitly support older versions.
+Compiled with Scala `3.9.0`, with no intention to explicitly support older versions.
 
 ## ⚙️ Example
 
