@@ -45,7 +45,8 @@ lazy val `asset-loader-common` = projectMatrix
 
     // sbt 2.0.x resolves a matrix's sources against the working directory,
     // so they are pinned to this build's own base:
-    sourceDirectory := (ThisBuild / baseDirectory).value / "core" / "common" / "src",
+    sourceDirectory :=
+      (ThisBuild / baseDirectory).value / "core" / "common" / "src",
   )
   .jvmPlatform(scalaVersions = Seq(scala3))
   .jsPlatform(scalaVersions = Seq(scala3))
@@ -75,9 +76,10 @@ lazy val `asset-loader-tapir-common` = projectMatrix
 
     // sbt 2.0.x resolves a matrix's sources against the working directory,
     // so they are pinned to this build's own base:
-    sourceDirectory := (ThisBuild / baseDirectory).value / "tapir" / "common" / "src",
+    sourceDirectory :=
+      (ThisBuild / baseDirectory).value / "tapir" / "common" / "src",
     libraryDependencies +=
-      "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.13.32",
+      "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.13.33",
   )
   .jvmPlatform(scalaVersions = Seq(scala3))
   .jsPlatform(scalaVersions = Seq(scala3))
