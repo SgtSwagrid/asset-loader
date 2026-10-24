@@ -2,8 +2,8 @@ ThisBuild / description := "A simple static asset loader for Scala web servers."
 ThisBuild / homepage    := Some(url("https://alecdorrington.com/asset-loader"))
 
 ThisBuild / organization         := "com.alecdorrington"
-ThisBuild / organizationName     := "SgtSwagrid"
-ThisBuild / organizationHomepage := Some(url("https://github.com/SgtSwagrid"))
+ThisBuild / organizationName     := "Alec Dorrington"
+ThisBuild / organizationHomepage := Some(url("https://alecdorrington.com"))
 
 ThisBuild / versionScheme := Some("strict")
 
