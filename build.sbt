@@ -61,8 +61,8 @@ lazy val `asset-loader-tapir` = project
     name          := "asset-loader-tapir",
     packagePrefix := "com.alecdorrington.assetloader.tapir",
     libraryDependencies ++= Seq(
-      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.13.33",
-      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.13.33",
+      "com.softwaremill.sttp.tapir" %% "tapir-prometheus-metrics" % "1.14.0",
+      "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % "1.14.0",
     ),
   )
 
@@ -79,7 +79,7 @@ lazy val `asset-loader-tapir-common` = projectMatrix
     sourceDirectory :=
       (ThisBuild / baseDirectory).value / "tapir" / "common" / "src",
     libraryDependencies +=
-      "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.13.33",
+      "com.softwaremill.sttp.tapir" %% "tapir-core" % "1.14.0",
   )
   .jvmPlatform(scalaVersions = Seq(scala3))
   .jsPlatform(scalaVersions = Seq(scala3))
