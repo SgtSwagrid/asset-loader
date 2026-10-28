@@ -8,6 +8,9 @@
   </span>
 </div>
 
+> [!WARNING]
+> Asset Loader is still a prototype. Anything could be broken or change between minor versions.
+
 <br/><br/>
 
 > "The more you sweat in peace, the less you bleed in war." — Norman Schwarzkopf.
@@ -25,13 +28,23 @@ This tool is extremely small and minimalistic, with absolutely no bells or whist
 
 ## ⬇️ Installation
 
-Add the following dependency to your `build.sbt`:
+There are several components which can be installed separately, but the same version number (e.g. [latest](../../releases/latest)) must be used across all of them.
+The following applies for [Scala 3](https://www.scala-lang.org/) projects built with [sbt 2](https://www.scala-sbt.org/).
+Add the desired components to your `build.sbt` file:
 
 ```scala
-libraryDependencies += "com.alecdorrington" %% "asset-loader" % "0.2.7"
-```
+// Core (required)
+libraryDependencies += "com.alecdorrington" %% "asset-loader" % "{version}"
 
-Compiled with Scala `3.9.0`, with no intention to explicitly support older versions.
+// Tapir server connector
+libraryDependencies += "com.alecdorrington" %% "asset-loader-tapir" % "{version}"
+
+// Common part of the core, for the client
+libraryDependencies += "com.alecdorrington" %% "asset-loader-common" % "{version}"
+
+// Common part of the Tapir connector, for the client
+libraryDependencies += "com.alecdorrington" %% "asset-loader-tapir-common" % "{version}"
+```
 
 ## ⚙️ Example
 
@@ -61,11 +74,7 @@ Contributions are welcome!
 
 ### Tapir
 
-[Tapir](https://tapir.softwaremill.com/en/latest/) is a library to describe HTTP APIs and expose them as a server. A separate connector is provided to easily create a Tapir endpoint that serves static files from _Asset Loader_. Just add the following additional dependency:
-
-```scala
-libraryDependencies += "com.alecdorrington" %% "asset-loader-tapir" % "0.2.7"
-```
+[Tapir](https://tapir.softwaremill.com/en/latest/) is a library to describe HTTP APIs and expose them as a server. A separate connector, `asset-loader-tapir`, is provided to easily create a Tapir endpoint that serves static files from _Asset Loader_.
 
 Observe the following minimal example, using [Netty](https://netty.io/) and [Cats Effect](https://typelevel.org/cats-effect/):
 
@@ -92,19 +101,9 @@ object Main extends ResourceApp.Forever:
 
 All of the above dependencies are exclusively for the JVM.
 However, you may wish to access the non-JVM-specific functionality from the client as well.
-For this reason, each aforementioned dependency is published with a common part that is cross-compiled.
+For this reason, each aforementioned dependency is published with a common part that is cross-compiled: `asset-loader-common` and `asset-loader-tapir-common`.
 
-These can be installed as follows:
-
-```scala
-libraryDependencies += "com.alecdorrington" %%% "asset-loader-common" % "0.2.7"
-```
-
-```scala
-libraryDependencies += "com.alecdorrington" %%% "asset-loader-tapir-common" % "0.2.7"
-```
-
-Note that you don't need to explicitly include the above if you only use this library on the server.
+Note that you don't need to explicitly include these if you only use this library on the server.
 
 
 ## 👁️ See also
