@@ -36,12 +36,15 @@ lazy val `asset-loader` = project
     packagePrefix := "com.alecdorrington.assetloader",
   )
 
-/** Cross-compiled for JVM and JS. */
+/**
+  * Cross-compiled for JVM and JS. Its sources sit in their packages'
+  * directories rather than under a package prefix, as IntelliJ never gives one
+  * to the sources the two share.
+  */
 lazy val `asset-loader-common` = projectMatrix
   .in(file("core/common"))
   .settings(
-    name          := "asset-loader-common",
-    packagePrefix := "com.alecdorrington.assetloader",
+    name := "asset-loader-common",
 
     // sbt 2.0.x resolves a matrix's sources against the working directory,
     // so they are pinned to this build's own base:
@@ -66,13 +69,12 @@ lazy val `asset-loader-tapir` = project
     ),
   )
 
-/** Cross-compiled for JVM and JS. */
+/** Cross-compiled for JVM and JS, its sources placed as the common core's. */
 lazy val `asset-loader-tapir-common` = projectMatrix
   .in(file("tapir/common"))
   .dependsOn(`asset-loader-common`)
   .settings(
-    name          := "asset-loader-tapir-common",
-    packagePrefix := "com.alecdorrington.assetloader.tapir",
+    name := "asset-loader-tapir-common",
 
     // sbt 2.0.x resolves a matrix's sources against the working directory,
     // so they are pinned to this build's own base:
